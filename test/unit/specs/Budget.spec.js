@@ -46,4 +46,19 @@ describe('Budget Calculator', () => {
     // assert
     expect(result).toBe(1);
   });
+
+  it('give "$28" for "2019-02" and date-range from "2019-02-15" to "2019-03-15"，should get "14"', () => {
+    // arrange
+    const wrapper = mount(Budget);
+    const budget = 28;
+    const budgetDate = '2019-02';
+    const startDate = '2019-02-15';
+    const endDate = '2019-03-15';
+
+    // act
+    const result = wrapper.vm.budgetCalculator(budget, budgetDate, startDate, endDate);
+
+    // assert
+    expect(result).toBe(14);
+  });
 });

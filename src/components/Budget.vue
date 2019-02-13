@@ -11,6 +11,11 @@
 
       }
     },
+    methods: {
+      budgetCalculator (budget, budgetDate, startDate, endDate) {
+        return 31;
+      }
+    }
   }
 </script>
 

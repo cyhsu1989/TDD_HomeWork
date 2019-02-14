@@ -158,6 +158,6 @@ describe('Budget Calculator', () => {
     const result = wrapper.vm.budgetCalculator(budgetSettings, startDate, endDate);
 
     // assert
-    expect(result).toBe(false);
+    expect(result).toBe(0);
   });
 });

@@ -16,7 +16,7 @@ export default {
   methods: {
     budgetCalculator(budgetSettings, startDate, endDate) {
       if (budgetSettings.length === 0 || !startDate || !endDate) {
-        return false;
+        return 0;
       }
 
       let resultBudget = 0;

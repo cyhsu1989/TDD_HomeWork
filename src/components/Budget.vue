@@ -14,11 +14,19 @@ export default {
     };
   },
   methods: {
-    budgetCalculator(budget, budgetDate, startDate, endDate) {
+    budgetCalculator(budgetSettings, startDate, endDate) {
+      let resultBudget = 0;
+      for (let i = 0; i < budgetSettings.length; i++) {
+        resultBudget += this.getBudgetOfMonth(budgetSettings[i].budget, budgetSettings[i].budgetDate, startDate, endDate);
+      }
+
+      return resultBudget;
+    },
+    getBudgetOfMonth(budget, budgetDate, startDate, endDate) {
       const daysInMonth = moment(budgetDate, 'YYYY-MM').daysInMonth();
       const budgetPerOneDay = budget / daysInMonth;
+      const monthLists = this.getMonthsInDateRange(startDate, endDate);
       let daysInDateRange;
-      let monthLists = this.getMonthsInDateRange(startDate, endDate);
 
       if (monthLists.length === 1) {
         daysInDateRange = this.getDaysInDateRange(startDate, endDate);
@@ -28,7 +36,7 @@ export default {
         let currentMonthRemainDays;
 
         for (let i = 0; i < monthLists.length; i++) {
-          if (moment(budgetDate).get('month') + 1 == moment(monthLists[i]).get('month') + 1) {
+          if (moment(budgetDate).get('month') + 1 === moment(monthLists[i]).get('month') + 1) {
             currentMonthStart = moment(startDate);
             currentMonthEnd = moment(startDate).endOf('month');
             currentMonthRemainDays = this.getDaysInDateRange(currentMonthStart, currentMonthEnd);
@@ -45,20 +53,20 @@ export default {
       return Math.abs(a.diff(b, 'days')) + 1;
     },
     getMonthsInDateRange(startDate, endDate) {
-      var dateStart = moment(startDate);
-      var dateEnd = moment(endDate);
-      var monthValues = [];
+      const dateStart = moment(startDate);
+      const dateEnd = moment(endDate);
+      const monthValues = [];
 
       while (dateEnd > dateStart || dateStart.format('M') === dateEnd.format('M')) {
         monthValues.push(dateStart.format('YYYY-MM'));
-        dateStart.add(1,'month');
+        dateStart.add(1, 'month');
       }
 
       return monthValues;
     },
     isSameMonth(startDate, endDate) {
       return moment(startDate).isSame(endDate, 'month');
-    }
+    },
   },
 };
 </script>

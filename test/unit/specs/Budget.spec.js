@@ -5,13 +5,17 @@ describe('Budget Calculator', () => {
   it('give "$31" for "2019-03" and date-range from "2019-03-01" to "2019-03-31"，should get "31"', () => {
     // arrange
     const wrapper = mount(Budget);
-    const budget = 31;
-    const budgetDate = '2019-03';
+    const budgetSettings = [
+      {
+        budget: 31,
+        budgetDate: '2019-03',
+      },
+    ];
     const startDate = '2019-03-01';
     const endDate = '2019-03-31';
 
     // act
-    const result = wrapper.vm.budgetCalculator(budget, budgetDate, startDate, endDate);
+    const result = wrapper.vm.budgetCalculator(budgetSettings, startDate, endDate);
 
     // assert
     expect(result).toBe(31);
@@ -20,13 +24,17 @@ describe('Budget Calculator', () => {
   it('give "$28" for "2019-02" and date-range from "2019-02-01" to "2019-02-28"，should get "28"', () => {
     // arrange
     const wrapper = mount(Budget);
-    const budget = 28;
-    const budgetDate = '2019-02';
+    const budgetSettings = [
+      {
+        budget: 28,
+        budgetDate: '2019-02',
+      },
+    ];
     const startDate = '2019-02-01';
     const endDate = '2019-02-28';
 
     // act
-    const result = wrapper.vm.budgetCalculator(budget, budgetDate, startDate, endDate);
+    const result = wrapper.vm.budgetCalculator(budgetSettings, startDate, endDate);
 
     // assert
     expect(result).toBe(28);
@@ -35,13 +43,17 @@ describe('Budget Calculator', () => {
   it('give "$31" for "2019-03" and date-range from "2019-03-01" to "2019-03-01"，should get "1"', () => {
     // arrange
     const wrapper = mount(Budget);
-    const budget = 31;
-    const budgetDate = '2019-03';
+    const budgetSettings = [
+      {
+        budget: 31,
+        budgetDate: '2019-03',
+      },
+    ];
     const startDate = '2019-03-01';
     const endDate = '2019-03-01';
 
     // act
-    const result = wrapper.vm.budgetCalculator(budget, budgetDate, startDate, endDate);
+    const result = wrapper.vm.budgetCalculator(budgetSettings, startDate, endDate);
 
     // assert
     expect(result).toBe(1);
@@ -50,15 +62,42 @@ describe('Budget Calculator', () => {
   it('give "$28" for "2019-02" and date-range from "2019-02-15" to "2019-03-15"，should get "14"', () => {
     // arrange
     const wrapper = mount(Budget);
-    const budget = 28;
-    const budgetDate = '2019-02';
+    const budgetSettings = [
+      {
+        budget: 28,
+        budgetDate: '2019-02',
+      },
+    ];
     const startDate = '2019-02-15';
     const endDate = '2019-03-15';
 
     // act
-    const result = wrapper.vm.budgetCalculator(budget, budgetDate, startDate, endDate);
+    const result = wrapper.vm.budgetCalculator(budgetSettings, startDate, endDate);
 
     // assert
     expect(result).toBe(14);
+  });
+
+  it('give "$28" for "2019-02" and "$93" for "2019-03" and date-range from "2019-02-28" to "2019-03-01"，should get "4"', () => {
+    // arrange
+    const wrapper = mount(Budget);
+    const budgetSettings = [
+      {
+        budget: 28,
+        budgetDate: '2019-02',
+      },
+      {
+        budget: 93,
+        budgetDate: '2019-03',
+      },
+    ];
+    const startDate = '2019-02-28';
+    const endDate = '2019-03-01';
+
+    // act
+    const result = wrapper.vm.budgetCalculator(budgetSettings, startDate, endDate);
+
+    // assert
+    expect(result).toBe(4);
   });
 });

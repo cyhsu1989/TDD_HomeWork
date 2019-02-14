@@ -146,4 +146,18 @@ describe('Budget Calculator', () => {
     // assert
     expect(result).toBe(2);
   });
+
+  it('should get false when "budget" and "budgetDate" are null', () => {
+    // arrange
+    const wrapper = mount(Budget);
+    const budgetSettings = [];
+    const startDate = '';
+    const endDate = '';
+
+    // act
+    const result = wrapper.vm.budgetCalculator(budgetSettings, startDate, endDate);
+
+    // assert
+    expect(result).toBe(false);
+  });
 });

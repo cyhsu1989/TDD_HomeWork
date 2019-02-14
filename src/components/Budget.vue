@@ -15,6 +15,10 @@ export default {
   },
   methods: {
     budgetCalculator(budgetSettings, startDate, endDate) {
+      if (budgetSettings.length === 0 || !startDate || !endDate) {
+        return false;
+      }
+
       let resultBudget = 0;
       for (let i = 0; i < budgetSettings.length; i++) {
         resultBudget += this.getBudgetOfMonth(budgetSettings[i].budget, budgetSettings[i].budgetDate, startDate, endDate);

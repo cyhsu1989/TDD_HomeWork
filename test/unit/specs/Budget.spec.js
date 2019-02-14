@@ -123,4 +123,27 @@ describe('Budget Calculator', () => {
     // assert
     expect(result).toBe(122);
   });
+
+  it('give "$31" for "2019-01" and "$31" for "2020-01" and date-range from "2019-01-31" to "2020-01-01"，should get "2"', () => {
+    // arrange
+    const wrapper = mount(Budget);
+    const budgetSettings = [
+      {
+        budget: 31,
+        budgetDate: '2019-01',
+      },
+      {
+        budget: 31,
+        budgetDate: '2020-01',
+      },
+    ];
+    const startDate = '2019-01-31';
+    const endDate = '2020-01-01';
+
+    // act
+    const result = wrapper.vm.budgetCalculator(budgetSettings, startDate, endDate);
+
+    // assert
+    expect(result).toBe(2);
+  });
 });

@@ -35,7 +35,10 @@ export default {
         let currentMonthRemainDays;
 
         for (let i = 0; i < monthLists.length; i++) {
-          if (moment(budgetDate).get('month') + 1 === moment(monthLists[i]).get('month') + 1) {
+          if (
+            moment(budgetDate).get('month') + 1 === moment(monthLists[i]).get('month') + 1 &&
+            moment(budgetDate).get('year') === moment(monthLists[i]).get('year')
+          ) {
             if (moment(monthLists[i]).get('month') + 1 === moment(startDate).get('month') + 1) {
               currentMonthStart = moment(startDate);
               currentMonthEnd = moment(startDate).endOf('month');

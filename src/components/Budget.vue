@@ -19,7 +19,6 @@ export default {
       for (let i = 0; i < budgetSettings.length; i++) {
         resultBudget += this.getBudgetOfMonth(budgetSettings[i].budget, budgetSettings[i].budgetDate, startDate, endDate);
       }
-
       return resultBudget;
     },
     getBudgetOfMonth(budget, budgetDate, startDate, endDate) {
@@ -37,9 +36,19 @@ export default {
 
         for (let i = 0; i < monthLists.length; i++) {
           if (moment(budgetDate).get('month') + 1 === moment(monthLists[i]).get('month') + 1) {
-            currentMonthStart = moment(startDate);
-            currentMonthEnd = moment(startDate).endOf('month');
-            currentMonthRemainDays = this.getDaysInDateRange(currentMonthStart, currentMonthEnd);
+            if (moment(monthLists[i]).get('month') + 1 === moment(startDate).get('month') + 1) {
+              currentMonthStart = moment(startDate);
+              currentMonthEnd = moment(startDate).endOf('month');
+              currentMonthRemainDays = this.getDaysInDateRange(currentMonthStart, currentMonthEnd);
+            } else if (moment(monthLists[i]).get('month') + 1 === moment(endDate).get('month') + 1) {
+              currentMonthStart = moment(endDate);
+              currentMonthEnd = moment(endDate).startOf('month');
+              currentMonthRemainDays = this.getDaysInDateRange(currentMonthStart, currentMonthEnd);
+            } else {
+              currentMonthStart = moment(monthLists[i]);
+              currentMonthEnd = moment(monthLists[i]).endOf('month');
+              currentMonthRemainDays = this.getDaysInDateRange(currentMonthStart, currentMonthEnd);
+            }
           }
         }
         return budgetPerOneDay * currentMonthRemainDays;

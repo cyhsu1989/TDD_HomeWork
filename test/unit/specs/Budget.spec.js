@@ -100,4 +100,27 @@ describe('Budget Calculator', () => {
     // assert
     expect(result).toBe(4);
   });
+
+  it('give "$60" for "2019-04" and "$120" for "2019-06" and date-range from "2019-04-30" to "2019-07-15"，should get "122"', () => {
+    // arrange
+    const wrapper = mount(Budget);
+    const budgetSettings = [
+      {
+        budget: 60,
+        budgetDate: '2019-04',
+      },
+      {
+        budget: 120,
+        budgetDate: '2019-06',
+      },
+    ];
+    const startDate = '2019-04-30';
+    const endDate = '2019-07-15';
+
+    // act
+    const result = wrapper.vm.budgetCalculator(budgetSettings, startDate, endDate);
+
+    // assert
+    expect(result).toBe(122);
+  });
 });
